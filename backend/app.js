@@ -9,11 +9,13 @@ const auth = require('./middlewares/auth');
 const NotFound = require('./errors/NotFound');
 const { loginJoi, createUserJoi } = require('./middlewares/validation');
 const errorCenter = require('./middlewares/errorCenter');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
+app.use(requestLogger);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -27,6 +29,8 @@ app.post('/signup', createUserJoi, createUser);
 app.use(auth);
 app.use(userRoutes);
 app.use(cardRoutes);
+
+app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
 
 app.use((req, res, next) => {
