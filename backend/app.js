@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const cardRoutes = require('./routes/cards');
 const userRoutes = require('./routes/users');
 const { login, createUser } = require('./controllers/users');
@@ -14,6 +15,17 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+// app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3001',
+    'http://localhost:3000'],
+  credentials: true,
+  preflightContinue: false,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization', 'Origin'],
+  optionsSuccessStatus: 204,
+}));
 
 app.use(requestLogger);
 app.use(bodyParser.json());

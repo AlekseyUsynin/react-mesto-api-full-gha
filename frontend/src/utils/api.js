@@ -1,7 +1,8 @@
+import { baseUrl } from "./auth";
+
 class Api {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
-    this._headers = headers;
   }
 
   _checkResponse(res) {
@@ -15,14 +16,16 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this._headers,
-    }).then(this._checkResponse);
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+    }).then(res => this._checkResponse(res));
   }
 
   changeUserAvatar(body) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ avatar: body.avatar }),
     }).then(this._checkResponse);
   }
@@ -30,21 +33,23 @@ class Api {
   changeUserData(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify(data),
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
     }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
     }).then(this._checkResponse);
   }
 
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._headers,
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -55,23 +60,25 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers,
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
     }).then(this._checkResponse);
   }
 
   addLike(id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: `${isLiked ? "PUT" : "DELETE"}`,
-      headers: this._headers,
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
     }).then(this._checkResponse);
   }
 }
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-60",
+  baseUrl: baseUrl,
   headers: {
-    authorization: "26c5076c-7af6-4200-9f3f-e51fcfc63afb",
-    "Content-Type": "application/json",
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
   },
 });
 
