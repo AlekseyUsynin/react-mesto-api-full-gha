@@ -5,7 +5,8 @@ module.exports = (req, res, next) => {
   // достаём авторизационный заголовок
   const { authorization } = req.headers;
   // убеждаемся, что он есть или начинается с Bearer
-  if (!authorization || !authorization.startsWith('Bearer ')) {
+  // if (!authorization || !authorization.startsWith('Bearer ')) {
+  if (!authorization) {
     throw new Unauthorized('Необходима авторизация!');
   }
 
