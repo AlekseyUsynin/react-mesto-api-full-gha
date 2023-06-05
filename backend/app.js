@@ -38,8 +38,8 @@ app.post('/signin', loginJoi, login);
 app.post('/signup', createUserJoi, createUser);
 
 app.use(auth);
-app.use('/api', userRoutes);
-app.use('/api', cardRoutes);
+app.use('/', userRoutes);
+app.use('/', cardRoutes);
 
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
