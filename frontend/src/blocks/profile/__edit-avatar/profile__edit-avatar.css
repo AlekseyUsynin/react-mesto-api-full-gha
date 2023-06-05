@@ -1,0 +1,10 @@
+.profile__edit-avatar {
+  margin: 0 auto;
+  background-image: url("/src/images/avatar-edit-btn.svg.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  border-radius: 50px;
+  height: 120px;
+  width: 120px;
+}
