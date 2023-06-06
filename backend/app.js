@@ -18,21 +18,21 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-// app.use(cors());
-app.use(cors({
-  origin: ['http://localhost:3001',
-    'http://localhost:3000',
-    'http://mesto-usynin.nomoredomains.rocks',
-    'https://mesto-usynin.nomoredomains.rocks',
-    'http://api.mesto-usynin.nomoredomains.rocks',
-    'https://api.mesto-usynin.nomoredomains.rocks',
-  ],
-  credentials: true,
-  preflightContinue: false,
-  methods: 'GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD',
-  allowedHeaders: ['Content-Type', 'Authorization', 'Origin'],
-  optionsSuccessStatus: 204,
-}));
+app.use(cors());
+// app.use(cors({
+//   origin: ['http://localhost:3001',
+//     'http://localhost:3000',
+//     'http://mesto-usynin.nomoredomains.rocks',
+//     'https://mesto-usynin.nomoredomains.rocks',
+//     'http://api.mesto-usynin.nomoredomains.rocks',
+//     'https://api.mesto-usynin.nomoredomains.rocks',
+//   ],
+//   credentials: true,
+//   preflightContinue: false,
+//   methods: 'GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD',
+//   allowedHeaders: ['Content-Type', 'Authorization', 'Origin'],
+//   optionsSuccessStatus: 204,
+// }));
 
 app.use(cookieParser());
 app.use(requestLogger);

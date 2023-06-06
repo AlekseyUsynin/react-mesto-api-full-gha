@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 130.193.42.229
+IP 130.193.42.229
 
 Frontend https://mesto-usynin.nomoredomains.rocks
 
