@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
   // убеждаемся, что он есть или начинается с Bearer
   // if (!authorization || !authorization.startsWith('Bearer ')) {
   if (!token) {
-    throw new Unauthorized('Необходима авторизация!');
+    return next(new Unauthorized('Необходима авторизация!'));
   }
 
   // извлечём токен

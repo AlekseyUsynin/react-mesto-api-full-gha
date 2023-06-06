@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -36,8 +35,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use(requestLogger);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Не раблотает с порта mongodb://localhost:27017
 // решение: https://www.mongodb.com/community/forums/t/mongooseserverselectionerror-connect-econnrefused-127-0-0-1-27017/123421/2
@@ -53,15 +51,15 @@ app.post('/signin', loginJoi, login);
 app.post('/signup', createUserJoi, createUser);
 
 app.use(auth);
-app.use(userRoutes);
-app.use(cardRoutes);
-
-app.use(errorLogger); // подключаем логгер ошибок
-app.use(errors());
+app.use('/users', userRoutes);
+app.use('/cards', cardRoutes);
 
 app.use((req, res, next) => {
   next(new NotFound('Такой страницы нет.'));
 });
+
+app.use(errorLogger); // подключаем логгер ошибок
+app.use(errors());
 
 app.use(errorCenter);
 
