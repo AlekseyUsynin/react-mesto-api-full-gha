@@ -70,7 +70,7 @@ function App() {
     if (userId) {
       // console.log('userId', userId);
       auth
-        .checkToken(userId)
+        .checkToken()
         .then((res) => {
           if (res) {
           // console.log('userId', res);
