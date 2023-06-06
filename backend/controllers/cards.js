@@ -5,6 +5,7 @@ const Forbidden = require('../errors/Forbidden');
 
 module.exports.getCards = (req, res, next) => {
   CardSchema.find({})
+    .populate(['owner', 'likes'])
     .then((cards) => res.send(cards))
     .catch(next);
 };
@@ -12,8 +13,9 @@ module.exports.getCards = (req, res, next) => {
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   CardSchema.create({ name, link, owner: req.user._id })
+    .then((card) => card.populate('owner'))
     .then((card) => {
-      res.status(201).send({ data: card });
+      res.status(201).send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -27,6 +29,7 @@ module.exports.createCard = (req, res, next) => {
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
   CardSchema.findById(cardId)
+    .populate(['owner', 'likes'])
     .then((card) => {
       if (!card) {
         throw new NotFound('Карточка с таким id не найдена.');
@@ -52,11 +55,12 @@ module.exports.likeCard = (req, res, next) => CardSchema.findByIdAndUpdate(
   { $addToSet: { likes: req.user._id } },
   { new: true },
 )
+  .populate(['owner', 'likes'])
   .then((card) => {
     if (!card) {
       throw new NotFound('Карточка с таким id не найдена.');
     }
-    return res.send({ data: card });
+    return res.json(card);
   })
   .catch((err) => {
     if (err.name === 'CastError') {
@@ -71,12 +75,13 @@ module.exports.dislikeCard = (req, res, next) => CardSchema.findByIdAndUpdate(
   { $pull: { likes: req.user._id } },
   { new: true },
 )
-
+  .populate(['owner', 'likes'])
   .then((card) => {
     if (!card) {
       throw new NotFound('арточка с таким id не найдена.');
     }
-    return res.send({ data: card });
+    // return res.send({ data: card });
+    return res.json(card);
   })
   .catch((err) => {
     if (err.name === 'CastError') {
