@@ -1,4 +1,4 @@
-export const baseUrl = "http://api.mesto-usynin.nomoredomains.rocks";
+export const baseUrl = "https://api.mesto-usynin.nomoredomains.rocks";
 
 const checkResponse = (res) =>
   res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
