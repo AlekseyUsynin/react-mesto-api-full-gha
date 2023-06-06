@@ -11,6 +11,6 @@
 
 IP-адрес x.x.x.x
 
-Frontend https://...
+Frontend https://mesto-usynin.nomoredomains.rocks
 
 Backend https://...
