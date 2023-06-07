@@ -30,7 +30,7 @@ export const authorize = (email, password) => {
 export const checkToken = () => {
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",
-    // credentials: "include",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
