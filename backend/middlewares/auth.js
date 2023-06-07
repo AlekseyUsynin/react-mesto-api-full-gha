@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'fire');
   } catch (err) {
     // отправим ошибку, если не получилось
-    throw new Unauthorized('Необходима авторизация!');
+    return next(new Unauthorized('Необходима авторизация!'));
   }
 
   req.user = payload; // записываем пейлоуд в объект запроса
