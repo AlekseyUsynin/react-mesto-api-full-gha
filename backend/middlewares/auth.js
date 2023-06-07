@@ -9,16 +9,15 @@ module.exports = (req, res, next) => {
     return next(new Unauthorized('Необходима авторизация!'));
   }
 
-  // let payload;
+  let payload;
 
   try {
-    // payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'fire');
-    jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'fire');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'fire');
   } catch (err) {
     return next(new Unauthorized('Необходима авторизация!'));
   }
 
-  // req.user = payload;
+  req.user = payload;
 
   return next();
 };
