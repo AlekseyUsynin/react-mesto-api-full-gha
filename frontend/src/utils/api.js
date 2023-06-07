@@ -16,7 +16,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      credentials: 'include',
+      // credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     }).then(res => this._checkResponse(res));
   }
@@ -24,7 +24,7 @@ class Api {
   changeUserAvatar(body) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      credentials: 'include',
+      // credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ avatar: body.avatar }),
     }).then(this._checkResponse);
@@ -33,7 +33,7 @@ class Api {
   changeUserData(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      credentials: 'include',
+      // credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
         name: data.name,
@@ -44,7 +44,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      credentials: 'include',
+      // credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     }).then(this._checkResponse);
   }
@@ -52,7 +52,7 @@ class Api {
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      credentials: 'include',
+      // credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: data.name,
@@ -64,7 +64,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      credentials: 'include',
+      // credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     }).then(this._checkResponse);
   }
@@ -72,7 +72,7 @@ class Api {
   addLike(id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: `${isLiked ? "PUT" : "DELETE"}`,
-      credentials: 'include',
+      // credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     }).then(this._checkResponse);
   }
