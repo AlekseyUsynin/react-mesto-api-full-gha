@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const cardRoutes = require('./routes/cards');
 const userRoutes = require('./routes/users');
@@ -32,6 +33,7 @@ app.use(cors({
   optionsSuccessStatus: 204,
 }));
 
+app.use(cookieParser());
 app.use(requestLogger);
 app.use(express.json());
 
