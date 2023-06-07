@@ -18,7 +18,7 @@ class Api {
       method: "GET",
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-    }).then(res => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   changeUserAvatar(body) {

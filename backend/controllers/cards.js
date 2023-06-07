@@ -80,7 +80,6 @@ module.exports.dislikeCard = (req, res, next) => CardSchema.findByIdAndUpdate(
     if (!card) {
       throw new NotFound('арточка с таким id не найдена.');
     }
-    // return res.send({ data: card });
     return res.json(card);
   })
   .catch((err) => {
