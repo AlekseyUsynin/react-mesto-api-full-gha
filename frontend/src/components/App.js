@@ -33,12 +33,6 @@ function App() {
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
-    // const jwt = localStorage.getItem('jwt');
-    // const email = localStorage.getItem('email');
-    // console.log('jwt', jwt);
-    // console.log('email', email);
-    // console.log('localStorage', localStorage);
-    // console.log('userId', userId);
     if (userId) {
     api
       .getUserInfo()
@@ -64,19 +58,13 @@ function App() {
   // проверка токена
   useEffect(() => {
     const userId = localStorage.getItem('userId');
-    // console.log('localStorage', localStorage);
-    // console.log('userId', userId);
-    // const jwt = localStorage.getItem("jwt");
     if (userId) {
-      // console.log('userId', userId);
       auth
         .checkToken(userId)
         .then((res) => {
           if (res) {
-          // console.log('userId', res);
           if (res) {
             setIsLoggedIn(true);
-            // setIsEmail(res.data.email);
             setIsEmail(res.email);
             navigate("/");
           }
@@ -163,7 +151,6 @@ function App() {
           });
           navigate("/sign-in");
           setIsLoggedIn(true);
-          // setIsEmail(res.data.email);
           setIsEmail(res.email);
         } 
       })
@@ -185,8 +172,6 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        // localStorage.setItem("jwt", res.token);
-        // localStorage.setItem("email", res.email);
         localStorage.setItem('userId', res._id);
         setIsLoggedIn(true);
         setIsEmail(res.email);
@@ -204,8 +189,6 @@ function App() {
   //выход
   function handleLogOut() {
     localStorage.removeItem('userId');
-    // localStorage.removeItem("jwt");
-    // localStorage.removeItem("email");
     setIsLoggedIn(false);
     setIsEmail(null);
     navigate("/");
